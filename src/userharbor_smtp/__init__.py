@@ -1,2 +1,3 @@
-def hello() -> str:
-    return "Hello from userharbor-smtp!"
+from .sender import SMTPEmailSender
+
+__all__ = ["SMTPEmailSender"]
