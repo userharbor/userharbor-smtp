@@ -528,19 +528,19 @@ wheels = [
 
 [[package]]
 name = "userharbor"
-version = "0.1.1"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pwdlib", extra = ["argon2"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d2/1e/e414cd4bd11ed9b45d215eb6262a9cf2291c65afbcdb8335d1dfdb70f3e5/userharbor-0.1.1.tar.gz", hash = "sha256:2ca796b939f6a22c84bfde89e5053fcb73a68b22dc894e9516750e4849a239e2", size = 7129, upload-time = "2026-06-18T14:18:38.843Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/94/c1/d1f15b63631b0c0cc05109314015d7a519ce996d9598d6472381f524a48a/userharbor-0.4.0.tar.gz", hash = "sha256:6d8ae94c0b781a8cac46c696e4b371b016e53c0ca1484b165ee3e6cebaee55f5", size = 6919, upload-time = "2026-06-27T06:45:01.613Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f9/91/16b897953defeadf84cc11e79d0968a8188f38a750d87766b6b4b0b52308/userharbor-0.1.1-py3-none-any.whl", hash = "sha256:2ef12af8d8179bfcfeb5dec3407e3d0d17457d67479059a448c0609d50012722", size = 9174, upload-time = "2026-06-18T14:18:39.564Z" },
+    { url = "https://files.pythonhosted.org/packages/77/c2/12c00f53c3984b192554a7aab9a90a884c8a71c3b17319f32da8d053429e/userharbor-0.4.0-py3-none-any.whl", hash = "sha256:a2da067f7ae00d1a940bf146b49e643c2903a4e4cd22b745a0f3ece99e56871d", size = 8716, upload-time = "2026-06-27T06:45:00.722Z" },
 ]
 
 [[package]]
 name = "userharbor-smtp"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "jinja2" },
@@ -555,8 +555,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "jinja2", specifier = ">=3.1.6" },
-    { name = "userharbor", specifier = ">=0.1.1" },
+    { name = "jinja2", specifier = ">=3.0.0" },
+    { name = "userharbor", specifier = ">=0.4.0" },
 ]
 
 [package.metadata.requires-dev]

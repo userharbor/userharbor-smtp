@@ -25,6 +25,9 @@ class SMTPEmailSender:
         template_dir: str | PathLike[str] | None = None,
         verification_subject: str = "Verify your email",
         password_reset_subject: str = "Reset your password",
+        email_verified_subject: str = "Email verified",
+        password_changed_subject: str = "Password changed",
+        account_deleted_subject: str = "Account deleted",
         use_starttls: bool = True,
         use_ssl: bool = False,
         timeout: float = 10,
@@ -38,6 +41,9 @@ class SMTPEmailSender:
         self._template_dir = Path(template_dir) if template_dir is not None else None
         self._verification_subject = verification_subject
         self._password_reset_subject = password_reset_subject
+        self._email_verified_subject = email_verified_subject
+        self._password_changed_subject = password_changed_subject
+        self._account_deleted_subject = account_deleted_subject
         self._use_starttls = use_starttls
         self._use_ssl = use_ssl
         self._timeout = timeout
@@ -67,6 +73,30 @@ class SMTPEmailSender:
             token=reset_token,
         )
 
+    def send_email_verified(self, username: str, email: str) -> None:
+        self._send(
+            to_email=email,
+            subject=self._email_verified_subject,
+            template_name="email_verified.html",
+            username=username,
+        )
+
+    def send_password_changed(self, username: str, email: str) -> None:
+        self._send(
+            to_email=email,
+            subject=self._password_changed_subject,
+            template_name="password_changed.html",
+            username=username,
+        )
+
+    def send_account_deleted(self, username: str, email: str) -> None:
+        self._send(
+            to_email=email,
+            subject=self._account_deleted_subject,
+            template_name="account_deleted.html",
+            username=username,
+        )
+
     def _send(
         self,
         *,
@@ -74,7 +104,7 @@ class SMTPEmailSender:
         subject: str,
         template_name: TemplateName,
         username: str,
-        token: str,
+        token: str | None = None,
     ) -> None:
         html = self._environment.get_template(template_name).render(
             username=username,

@@ -21,8 +21,9 @@ SMTP email sender integration for
 [`userharbor`](https://github.com/userharbor/userharbor).
 
 The package provides `SMTPEmailSender`, an implementation of UserHarbor's
-`EmailSender` protocol. It sends verification and password reset messages with
-Python's standard `smtplib` and renders HTML email templates with Jinja.
+`EmailSender` protocol. It sends verification, password reset, and account
+security notification messages with Python's standard `smtplib` and renders
+HTML email templates with Jinja.
 
 ## Installation
 
@@ -49,6 +50,9 @@ By default, the sender uses HTML templates bundled with the package:
 
 * `verification.html`
 * `password_reset.html`
+* `email_verified.html`
+* `password_changed.html`
+* `account_deleted.html`
 
 To use custom templates, pass a directory containing files with the same names:
 
@@ -67,7 +71,7 @@ Each template receives:
 
 * `username`
 * `email`
-* `token`
+* `token` for verification and password reset messages
 
 Example `templates/emails/verification.html`:
 
@@ -90,6 +94,9 @@ SMTPEmailSender(
     template_dir=None,
     verification_subject="Verify your email",
     password_reset_subject="Reset your password",
+    email_verified_subject="Email verified",
+    password_changed_subject="Password changed",
+    account_deleted_subject="Account deleted",
     use_starttls=True,
     use_ssl=False,
     timeout=10,
