@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import smtplib
+import ssl
 from email.message import EmailMessage
 from email.utils import formataddr
 from importlib import resources
@@ -30,6 +31,8 @@ class SMTPEmailSender:
         account_deleted_subject: str = "Account deleted",
         use_starttls: bool = True,
         use_ssl: bool = False,
+        ssl_context: ssl.SSLContext | None = None,
+        allow_insecure: bool = False,
         timeout: float = 10,
     ) -> None:
         self._host = host
@@ -46,6 +49,9 @@ class SMTPEmailSender:
         self._account_deleted_subject = account_deleted_subject
         self._use_starttls = use_starttls
         self._use_ssl = use_ssl
+        if not use_starttls and not use_ssl and not allow_insecure:
+            raise ValueError("SMTP transport must use TLS")
+        self._ssl_context = ssl_context or ssl.create_default_context()
         self._timeout = timeout
         self._environment = Environment(
             loader=FunctionLoader(self._load_template),
@@ -119,13 +125,18 @@ class SMTPEmailSender:
         message.add_alternative(html, subtype="html")
 
         if self._use_ssl:
-            smtp = smtplib.SMTP_SSL(self._host, self._port, timeout=self._timeout)
+            smtp = smtplib.SMTP_SSL(
+                self._host,
+                self._port,
+                timeout=self._timeout,
+                context=self._ssl_context,
+            )
         else:
             smtp = smtplib.SMTP(self._host, self._port, timeout=self._timeout)
 
         with smtp:
             if self._use_starttls and not self._use_ssl:
-                smtp.starttls()
+                smtp.starttls(context=self._ssl_context)
             if self._username is not None and self._password is not None:
                 smtp.login(self._username, self._password)
             smtp.send_message(message)

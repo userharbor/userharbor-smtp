@@ -17,6 +17,7 @@ def test_send_verification_uses_custom_template_directory(
         from_email="noreply@example.com",
         template_dir=tmp_path,
         use_starttls=False,
+        allow_insecure=True,
     )
 
     sender.send_verification("alice", "alice@example.com", "verification-token")
@@ -43,6 +44,7 @@ def test_send_password_reset_uses_custom_template_directory(
         from_email="noreply@example.com",
         template_dir=tmp_path,
         use_starttls=False,
+        allow_insecure=True,
     )
 
     sender.send_password_reset("alice", "alice@example.com", "reset-token")
@@ -77,6 +79,7 @@ def test_account_notifications_use_custom_template_directory(
         from_email="noreply@example.com",
         template_dir=tmp_path,
         use_starttls=False,
+        allow_insecure=True,
     )
 
     sender.send_email_verified("alice", "alice@example.com")

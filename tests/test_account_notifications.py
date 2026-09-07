@@ -24,6 +24,7 @@ def test_account_notification_sends_rendered_html(
         password="smtp-password",
         from_email="noreply@example.com",
         use_starttls=False,
+        allow_insecure=True,
     )
 
     getattr(sender, method_name)("alice", "alice@example.com")
@@ -49,6 +50,7 @@ def test_account_notifications_can_use_custom_subjects(smtp_server) -> None:
         password_changed_subject="Credentials updated",
         account_deleted_subject="Account removed",
         use_starttls=False,
+        allow_insecure=True,
     )
 
     sender.send_email_verified("alice", "alice@example.com")

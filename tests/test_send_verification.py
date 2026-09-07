@@ -10,6 +10,7 @@ def test_send_verification_logs_in_and_sends_rendered_html(smtp_server) -> None:
         from_email="noreply@example.com",
         from_name="UserHarbor",
         use_starttls=False,
+        allow_insecure=True,
     )
 
     sender.send_verification("alice", "alice@example.com", "verification-token")
@@ -37,6 +38,7 @@ def test_send_verification_can_use_custom_subject(smtp_server) -> None:
         from_email="noreply@example.com",
         verification_subject="Confirm account",
         use_starttls=False,
+        allow_insecure=True,
     )
 
     sender.send_verification("alice", "alice@example.com", "verification-token")

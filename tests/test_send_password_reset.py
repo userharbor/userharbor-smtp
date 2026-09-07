@@ -9,6 +9,7 @@ def test_send_password_reset_sends_rendered_html(smtp_server) -> None:
         password="smtp-password",
         from_email="noreply@example.com",
         use_starttls=False,
+        allow_insecure=True,
     )
 
     sender.send_password_reset("alice", "alice@example.com", "reset-token")

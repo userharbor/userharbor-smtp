@@ -1,6 +1,6 @@
 [project]
 name = "userharbor-smtp"
-version = "0.2.0"
+version = "0.3.0"
 description = "SMTP integration for UserHarbor, a framework agnostic user management system for Python applications."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -29,7 +29,7 @@ classifiers = [
 ]
 dependencies = [
   "jinja2>=3.0.0",
-  "userharbor>=0.4.0",
+  "userharbor>=0.8.0",
 ]
 
 [project.urls]

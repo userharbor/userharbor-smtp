@@ -13,6 +13,7 @@ def test_send_raises_when_smtp_authentication_fails(smtp_server) -> None:
         password="wrong-password",
         from_email="noreply@example.com",
         use_starttls=False,
+        allow_insecure=True,
     )
 
     with pytest.raises(SMTPAuthenticationError):

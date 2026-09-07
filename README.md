@@ -13,10 +13,6 @@
 [![Pytest](https://img.shields.io/badge/testing-Pytest-red?logo=pytest&logoColor=red)](https://docs.pytest.org/)
 [![Zensical](https://img.shields.io/badge/docs-Zensical-yellow?logo=MaterialForMkDocs&logoColor=yellow)](https://userharborpaceshaman.github.io/userharbor/)
 
-> **Project status:** UserHarbor SQLAlchemy is currently in an early stage of development.
-> The API may change frequently. The library is not ready for production use yet.
-# userharbor-smtp
-
 SMTP email sender integration for
 [`userharbor`](https://github.com/userharbor/userharbor).
 
@@ -99,9 +95,17 @@ SMTPEmailSender(
     account_deleted_subject="Account deleted",
     use_starttls=True,
     use_ssl=False,
+    ssl_context=None,
+    allow_insecure=False,
     timeout=10,
 )
 ```
+
+TLS certificate and hostname verification use Python's secure default SSL
+context. Pass `ssl_context` only when the application needs a custom trusted
+certificate authority or TLS policy. At least one of `use_starttls` and
+`use_ssl` must be enabled by default. Set `allow_insecure=True` only for a
+trusted local SMTP relay where plaintext transport is an explicit decision.
 
 ## License
 

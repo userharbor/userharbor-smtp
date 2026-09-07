@@ -268,7 +268,7 @@ name = "exceptiongroup"
 version = "1.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
+    { name = "typing-extensions" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/50/79/66800aadf48771f6b62f7eb014e352e5d06856655206165d775e675a02c9/exceptiongroup-1.3.1.tar.gz", hash = "sha256:8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219", size = 30371, upload-time = "2025-11-21T23:01:54.787Z" }
 wheels = [
@@ -528,19 +528,19 @@ wheels = [
 
 [[package]]
 name = "userharbor"
-version = "0.4.0"
+version = "0.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pwdlib", extra = ["argon2"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/94/c1/d1f15b63631b0c0cc05109314015d7a519ce996d9598d6472381f524a48a/userharbor-0.4.0.tar.gz", hash = "sha256:6d8ae94c0b781a8cac46c696e4b371b016e53c0ca1484b165ee3e6cebaee55f5", size = 6919, upload-time = "2026-06-27T06:45:01.613Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a7/14/8a7bd78cd3caa678ea0a6d879562b1f2ba05fc2ae5a0f6e1029eef9399ae/userharbor-0.8.0.tar.gz", hash = "sha256:df48a580b0f1080b1f01a9c64c2cb863b0c604d81a60a74a06fd388d779fa90e", size = 11877, upload-time = "2026-08-18T13:00:10.208Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/77/c2/12c00f53c3984b192554a7aab9a90a884c8a71c3b17319f32da8d053429e/userharbor-0.4.0-py3-none-any.whl", hash = "sha256:a2da067f7ae00d1a940bf146b49e643c2903a4e4cd22b745a0f3ece99e56871d", size = 8716, upload-time = "2026-06-27T06:45:00.722Z" },
+    { url = "https://files.pythonhosted.org/packages/32/aa/48111603821a80f40edfb9e0201c375b8b2159b7b929dff052497117ac81/userharbor-0.8.0-py3-none-any.whl", hash = "sha256:8cae2747038453642378b84fd8839896eeacbfb62c2e8dd17da1380096081055", size = 18395, upload-time = "2026-08-18T13:00:09.081Z" },
 ]
 
 [[package]]
 name = "userharbor-smtp"
-version = "0.1.0"
+version = "0.3.0"
 source = { editable = "." }
 dependencies = [
     { name = "jinja2" },
@@ -556,7 +556,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "jinja2", specifier = ">=3.0.0" },
-    { name = "userharbor", specifier = ">=0.4.0" },
+    { name = "userharbor", specifier = ">=0.8.0" },
 ]
 
 [package.metadata.requires-dev]
