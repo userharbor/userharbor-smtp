@@ -5,7 +5,6 @@ import ssl
 from email.message import EmailMessage
 from email.utils import formataddr
 from importlib import resources
-from os import PathLike
 from pathlib import Path
 
 from jinja2 import Environment, FunctionLoader, StrictUndefined, select_autoescape
@@ -23,7 +22,8 @@ class SMTPEmailSender:
         username: str | None = None,
         password: str | None = None,
         from_name: str | None = None,
-        template_dir: str | PathLike[str] | None = None,
+        template_dir: Path | None = None,
+        template_context: dict[str, object] | None = None,
         verification_subject: str = "Verify your email",
         password_reset_subject: str = "Reset your password",
         email_verified_subject: str = "Email verified",
@@ -41,7 +41,8 @@ class SMTPEmailSender:
         self._password = password
         self._from_email = from_email
         self._from_name = from_name
-        self._template_dir = Path(template_dir) if template_dir is not None else None
+        self._template_dir = template_dir
+        self._template_context = dict(template_context or {})
         self._verification_subject = verification_subject
         self._password_reset_subject = password_reset_subject
         self._email_verified_subject = email_verified_subject
@@ -112,11 +113,13 @@ class SMTPEmailSender:
         username: str,
         token: str | None = None,
     ) -> None:
-        html = self._environment.get_template(template_name).render(
-            username=username,
-            email=to_email,
-            token=token,
-        )
+        context = {
+            **self._template_context,
+            "username": username,
+            "email": to_email,
+            "token": token,
+        }
+        html = self._environment.get_template(template_name).render(**context)
         message = EmailMessage()
         message["From"] = self._format_from()
         message["To"] = to_email

@@ -50,16 +50,20 @@ By default, the sender uses HTML templates bundled with the package:
 * `password_changed.html`
 * `account_deleted.html`
 
-To use custom templates, pass a directory containing files with the same names:
+To use custom templates, pass a `pathlib.Path` to a directory containing files
+with the same names:
 
 ```python
+from pathlib import Path
+
 email_sender = SMTPEmailSender(
     host="smtp.example.com",
     port=587,
     username="smtp-user",
     password="smtp-password",
     from_email="noreply@example.com",
-    template_dir="templates/emails",
+    template_dir=Path("templates/emails"),
+    template_context={"app_url": "https://example.com"},
 )
 ```
 
@@ -69,12 +73,14 @@ Each template receives:
 * `email`
 * `token` for verification and password reset messages
 
+Use `template_context` to add variables to every template. Built-in variables
+`username`, `email`, and `token` take precedence over custom values.
+
 Example `templates/emails/verification.html`:
 
 ```html
 <p>Hello {{ username }},</p>
-<p>Use this token to verify {{ email }}:</p>
-<p><strong>{{ token }}</strong></p>
+<p><a href="{{ app_url }}/auth/verify_email?token={{ token | urlencode }}">Verify {{ email }}</a></p>
 ```
 
 ## Configuration
@@ -88,6 +94,7 @@ SMTPEmailSender(
     password=None,
     from_name=None,
     template_dir=None,
+    template_context=None,
     verification_subject="Verify your email",
     password_reset_subject="Reset your password",
     email_verified_subject="Email verified",
